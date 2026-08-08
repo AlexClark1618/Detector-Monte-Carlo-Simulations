@@ -38,7 +38,9 @@ if __name__ == "__main__":
         int_list.append([I_mod, I_org])
         cosine_list.append(int_list[0][0]*np.cos(theta)**2)
     int_list = np.array(int_list)
+    
     plt.plot(zenith_points*180/np.pi, int_list[:,0], label = 'Modified Gaisser')
+    plt.plot(zenith_points*180/np.pi, int_list[:,1], label = 'Original Gaisser')
     plt.scatter(zenith_points*180/np.pi, cosine_list, c = 'red', label = 'cos^2(x)')
 
     #plt.plot(zenith_points*180/np.pi, int_list[:,1])

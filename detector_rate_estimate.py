@@ -7,7 +7,7 @@ from scipy import integrate
 #Hodoscope:
 
 A = 1.056 * 1.056 #Area in m^2
-theta_max = np.arctan(105.6/30) #Max Angular acceptance
+#theta_max = np.arctan(105.6/30) #Max Angular acceptance
 #To calculate the total flux I need to integrate over all possible energies and solid angle with a detector area projection correction term
 
 def KoNova_rate_estimate(E, theta):
@@ -17,6 +17,6 @@ def KoNova_rate_estimate(E, theta):
     
     return (10000 * modified_gaisser_formula(E, theta) * A * np.cos(theta) * 2 * np.pi * np.sin(theta))
 
-I = integrate.nquad(KoNova_rate_estimate, [[0.01, np.inf], [0, theta_max]])
+I = integrate.nquad(KoNova_rate_estimate, [[0, np.inf], [0, np.pi/2]])
 
 print(I)

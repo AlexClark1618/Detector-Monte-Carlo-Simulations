@@ -1,9 +1,9 @@
 import numpy as np
 
-r = 2.54   # cm
-h = 2 * r  # vertical separation (using h to avoid confusion with distance d)
+#r = 105.6   # cm
+#h = 30 # vertical separation (using h to avoid confusion with distance d)
 
-def sample_entry_points(N):
+def sample_entry_points(r, h, N):
     """Uniform points on a disk. Radius needs sqrt to avoid centre clustering."""
     u   = np.random.uniform(0, 1, N)
     phi = np.random.uniform(0, 2 * np.pi, N)
@@ -26,8 +26,8 @@ def sample_directions(N):
     azimuth   = np.random.uniform(0, 2 * np.pi, N)
     return cos_theta, sin_theta, azimuth
 
-def calculate_acceptance(N):
-    x0, y0                      = sample_entry_points(N)
+def calculate_acceptance(r, h, N):
+    x0, y0                      = sample_entry_points(r, h, N)
     cos_theta, sin_theta, az    = sample_directions(N)
 
     # Propagate ray to D2 plane
@@ -38,6 +38,10 @@ def calculate_acceptance(N):
     hits = (x_hit**2 + y_hit**2) < r**2
     return hits.sum() / N
 
-N          = 1_000_000
-acceptance = calculate_acceptance(N)
-print(f"Geometric acceptance: {acceptance:.4f}")
+if __name__ == "__main__":
+    r=  1.056
+    h = 0.3
+    N          = 1_000_000
+    acceptance = calculate_acceptance(r, h,N)
+    print(f"Geometric acceptance: {acceptance:.4f}")
+
