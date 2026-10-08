@@ -1,8 +1,5 @@
 import numpy as np
 
-#r = 105.6   # cm
-#h = 30 # vertical separation (using h to avoid confusion with distance d)
-
 def sample_entry_points(r, h, N):
     """Uniform points on a disk. Radius needs sqrt to avoid centre clustering."""
     u   = np.random.uniform(0, 1, N)
@@ -39,7 +36,7 @@ def calculate_acceptance(r, h, N):
     return hits.sum() / N
 
 if __name__ == "__main__":
-    r=  1.056
+    r=  1.056/2
     h = 0.3
     N          = 1_000_000
     acceptance = calculate_acceptance(r, h,N)

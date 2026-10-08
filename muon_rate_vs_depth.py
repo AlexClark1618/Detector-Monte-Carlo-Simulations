@@ -7,7 +7,7 @@ m_muon = 0.1057 #GeV
 def minimum_energy(d, theta):
     """
     Minimum energy for a muon to traverse a distance x
-    Should be equale to stopping power * density * distance
+    Should be equal to stopping power * density * distance
     """
     alpha = 2 #MeV cm^2/g #1.9 + 0.08*np.log(E/m_muon) #Approximate energy dependence
     epsilon = 2.55*10**5 #g/cm**2; for standard rock

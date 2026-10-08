@@ -27,6 +27,8 @@ def modified_gaisser_formula(E, theta):
 
 
 if __name__ == "__main__":
+    
+    '''
     zenith_points = np.linspace(0, np.pi/2, 90)
     int_list = []
     cosine_list = []
@@ -42,10 +44,25 @@ if __name__ == "__main__":
     plt.plot(zenith_points*180/np.pi, int_list[:,0], label = 'Modified Gaisser')
     plt.plot(zenith_points*180/np.pi, int_list[:,1], label = 'Original Gaisser')
     plt.scatter(zenith_points*180/np.pi, cosine_list, c = 'red', label = 'cos^2(x)')
+    '''
+    min_energy_list = np.linspace(0, 10, 10000)
+    int_list = []
+    theta = 0
 
+    for min_energy in min_energy_list:
+        I_mod = 10000 * int.quad(modified_gaisser_formula, min_energy, np.inf, args=(theta))[0]
+        int_list.append(I_mod)
+    int_list = np.array(int_list)
+    
+    plt.plot(min_energy_list, int_list, label = 'Modified Gaisser')
+    plt.axvline(x=0.045, color='red', linestyle='--', label='Predicted Muon Energy Threshold to Penetrate 11.5 g/cm^2 of Aluminum')
+    
     #plt.plot(zenith_points*180/np.pi, int_list[:,1])
-    plt.xlabel("Zenith (Degrees)")
-    plt.ylabel("Muon Flux (m^-2 s^-1 sr^-1)")
-    plt.title("Estimation of Muon Flux at Surfave Using Modified Gaisser Model")
+    plt.xlabel("Minimum Muon Energy (GeV)")
+    plt.ylabel("Vertical Muon Flux (m^-2 s^-1 sr^-1)")
+    plt.title("Estimation of Vertical Muon Flux at Surface Using Modified Gaisser Model")
+    #plt.yscale('log')
+    plt.xscale('log')
+    plt.ylim(0, 100)
     plt.legend()
     plt.show()
